@@ -1,1 +1,1 @@
-This website is for RashmiKnits. An Online Crochet store sample
+This website is for RashmiKnits. An Online Crochet store sample.
