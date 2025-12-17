@@ -4,58 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RashmiKnits</title>
+
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Soft theme config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#8B5CF6',
+            softbg: '#F7F7F7',
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body class="bg-gray-100 text-gray-900">
+<body class="bg-softbg text-gray-800">
 
 <!-- Header -->
-<header class="bg-white shadow sticky top-0 z-10">
-  <div class="max-w-md mx-auto p-4">
-    <h1 class="text-xl font-bold text-purple-700">RashmiKnits</h1>
-    <p class="text-sm text-gray-600">Crochet • Toys • Gifts • Decor</p>
+<header class="bg-white sticky top-0 z-10 border-b">
+  <div class="max-w-md mx-auto px-4 py-3">
+    <h1 class="text-2xl font-semibold text-primary">RashmiKnits</h1>
+    <p class="text-xs text-gray-500">Handmade Crochet • Gifts • Decor</p>
   </div>
 </header>
 
 <!-- Categories -->
-<section class="max-w-md mx-auto p-4 grid grid-cols-2 gap-4">
-  <button onclick="showCategory('toys')" class="bg-white p-4 rounded shadow">🧸 Toys</button>
-  <button onclick="showCategory('keychains')" class="bg-white p-4 rounded shadow">🔑 Keychains</button>
-  <button onclick="showCategory('magnets')" class="bg-white p-4 rounded shadow">🧲 Fridge Magnets</button>
-  <button onclick="showCategory('all')" class="bg-white p-4 rounded shadow">🛍 All</button>
+<section class="max-w-md mx-auto px-4 py-4 flex gap-2 overflow-x-auto">
+  <button onclick="showCategory('all')" class="category-btn">All</button>
+  <button onclick="showCategory('toys')" class="category-btn">🧸 Toys</button>
+  <button onclick="showCategory('keychains')" class="category-btn">🔑 Keychains</button>
+  <button onclick="showCategory('magnets')" class="category-btn">🧲 Magnets</button>
 </section>
 
 <!-- Products -->
-<section id="products" class="max-w-md mx-auto p-4 grid grid-cols-2 gap-4"></section>
+<section id="products" class="max-w-md mx-auto px-4 grid grid-cols-2 gap-4 pb-28"></section>
 
-<!-- Cart -->
-<section class="max-w-md mx-auto p-4 bg-white shadow mt-4">
-  <h2 class="font-bold mb-2">🛒 Cart</h2>
-  <ul id="cartItems" class="text-sm mb-2"></ul>
-  <p id="cartTotal" class="font-bold mb-2">Total: ₹0</p>
+<!-- Cart (Sticky Bottom) -->
+<section class="fixed bottom-0 left-0 right-0 bg-white border-t">
+  <div class="max-w-md mx-auto p-4">
+    <h2 class="font-semibold mb-2">🛒 Your Cart</h2>
 
-  <input
-    id="phone"
-    type="tel"
-    placeholder="Your Mobile Number"
-    class="w-full border p-2 rounded mb-2"
-  />
+    <ul id="cartItems" class="text-sm space-y-1 mb-2"></ul>
+    <p id="cartTotal" class="font-semibold mb-2"></p>
 
-  <button
-    onclick="submitOrder()"
-    class="w-full bg-purple-700 text-white py-2 rounded"
-  >
-    Submit Order
-  </button>
+    <input
+      id="phone"
+      type="tel"
+      placeholder="Your Mobile Number"
+      class="w-full border rounded px-3 py-2 text-sm mb-2"
+    />
+
+    <button
+      onclick="submitOrder()"
+      class="w-full bg-primary text-white py-2 rounded-lg font-medium hover:opacity-90 transition"
+    >
+      Order on WhatsApp
+    </button>
+  </div>
 </section>
+
+<!-- Styles -->
+<style>
+  .category-btn {
+    background: white;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    white-space: nowrap;
+  }
+</style>
 
 <script>
 const products = [
-  { id:1, name:'Crochet Toy', price:500, category:'toys', image:'images/product1.jpg' },
-  { id:2, name:'Soft Teddy', price:650, category:'toys', image:'images/product2.jpg' },
-  { id:3, name:'Heart Keychain', price:150, category:'keychains', image:'images/product3.jpg' },
-  { id:4, name:'Name Keychain', price:200, category:'keychains', image:'images/product4.jpg' },
-  { id:5, name:'Cute Magnet', price:180, category:'magnets', image:'images/product5.jpg' },
+  { id: 1, name: 'Crochet Toy', price: 500, category: 'toys', image: 'images/product1.jpg' },
+  { id: 2, name: 'Soft Teddy', price: 650, category: 'toys', image: 'images/product2.jpg' },
+  { id: 3, name: 'Heart Keychain', price: 150, category: 'keychains', image: 'images/product3.jpg' },
+  { id: 4, name: 'Name Keychain', price: 200, category: 'keychains', image: 'images/product4.jpg' },
+  { id: 5, name: 'Cute Magnet', price: 180, category: 'magnets', image: 'images/product5.jpg' },
 ];
 
 let cart = [];
@@ -64,25 +95,26 @@ function showCategory(cat) {
   const container = document.getElementById('products');
   container.innerHTML = '';
 
-  const filtered =
-    cat === 'all' ? products : products.filter(p => p.category === cat);
+  const filtered = cat === 'all'
+    ? products
+    : products.filter(p => p.category === cat);
 
   filtered.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'bg-white p-2 rounded shadow';
-    div.innerHTML = `
-      <img src="${p.image}"
-           class="rounded mb-2 aspect-square object-cover"
-           loading="lazy" />
-      <h3 class="text-sm font-bold">${p.name}</h3>
-      <p class="text-sm">₹${p.price}</p>
+    const card = document.createElement('div');
+    card.className = 'bg-white rounded-xl shadow-sm p-3';
+
+    card.innerHTML = `
+      <img src="${p.image}" class="rounded-lg aspect-square object-cover mb-2" />
+      <h3 class="text-sm font-medium">${p.name}</h3>
+      <p class="text-sm text-gray-600 mb-2">₹${p.price}</p>
       <button
         onclick="addToCart(${p.id})"
-        class="mt-2 w-full bg-green-500 text-white text-sm py-1 rounded">
-        Add
+        class="w-full text-sm border border-primary text-primary rounded-lg py-1 hover:bg-primary hover:text-white transition"
+      >
+        Add to Cart
       </button>
     `;
-    container.appendChild(div);
+    container.appendChild(card);
   });
 }
 
@@ -97,47 +129,46 @@ function updateCart() {
   list.innerHTML = '';
   let total = 0;
 
-  cart.forEach(i => {
-    total += i.price;
+  cart.forEach(item => {
+    total += item.price;
     const li = document.createElement('li');
-    li.textContent = `${i.name} - ₹${i.price}`;
+    li.textContent = `${item.name} — ₹${item.price}`;
     list.appendChild(li);
   });
 
-  document.getElementById('cartTotal').textContent = 'Total: ₹' + total;
+  document.getElementById('cartTotal').textContent =
+    cart.length ? `Total: ₹${total}` : '';
 }
 
 function submitOrder() {
-  if (cart.length === 0) {
-    alert('Cart is empty');
+  if (!cart.length) {
+    alert('Your cart is empty');
     return;
   }
 
-  const phone = document.getElementById('phone').value;
+  const phone = document.getElementById('phone').value.trim();
   if (!phone) {
-    alert('Please enter mobile number');
+    alert('Please enter your mobile number');
     return;
   }
 
-  let message = '🛍 *New Order*\\n\\n';
+  let message = '🧶 *New Order – RashmiKnits*%0A%0A';
   let total = 0;
 
   cart.forEach(i => {
-    message += `• ${i.name} - ₹${i.price}\\n`;
+    message += `• ${i.name} - ₹${i.price}%0A`;
     total += i.price;
   });
 
-  message += `\\n*Total:* ₹${total}`;
-  message += `\\n📞 *Customer Mobile:* ${phone}`;
+  message += `%0A*Total:* ₹${total}`;
+  message += `%0A📞 *Customer:* ${phone}`;
 
-  const businessNumber = '917982734398'; // replace with your WhatsApp number
-  const url = `https://wa.me/${businessNumber}?text=${encodeURIComponent(message)}`;
-
-  window.open(url, '_blank');
+  const businessNumber = '91XXXXXXXXXX'; // replace with your number
+  window.open(`https://wa.me/${businessNumber}?text=${message}`, '_blank');
 }
 
 showCategory('all');
 </script>
 
 </body>
-</html>
+  </html>
