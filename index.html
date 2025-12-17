@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Handmade Crafts Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+<!-- Header -->
+<header class="bg-white shadow sticky top-0 z-10">
+  <div class="max-w-md mx-auto p-4">
+    <h1 class="text-xl font-bold text-purple-700">Handmade Crafts</h1>
+    <p class="text-sm text-gray-600">Crochet • Toys • Gifts • Decor</p>
+  </div>
+</header>
+
+<!-- Categories -->
+<section class="max-w-md mx-auto p-4 grid grid-cols-2 gap-4">
+  <button onclick="showCategory('toys')" class="bg-white p-4 rounded shadow">🧸 Toys</button>
+  <button onclick="showCategory('keychains')" class="bg-white p-4 rounded shadow">🔑 Keychains</button>
+  <button onclick="showCategory('magnets')" class="bg-white p-4 rounded shadow">🧲 Fridge Magnets</button>
+  <button onclick="showCategory('all')" class="bg-white p-4 rounded shadow">🛍 All</button>
+</section>
+
+<!-- Products -->
+<section id="products" class="max-w-md mx-auto p-4 grid grid-cols-2 gap-4"></section>
+
+<!-- Cart -->
+<section class="max-w-md mx-auto p-4 bg-white shadow mt-4">
+  <h2 class="font-bold mb-2">🛒 Cart</h2>
+  <ul id="cartItems" class="text-sm mb-2"></ul>
+  <p id="cartTotal" class="font-bold"></p>
+
+  <input id="phone" type="tel" placeholder="Your Mobile Number" class="w-full border p-2 rounded mb-2" />
+  <button onclick="submitOrder()" class="w-full bg-purple-700 text-white py-2 rounded">Submit Order</button>
+</section>
+
+<script>
+const products = [
+  { id:1, name:'Crochet Toy', price:500, category:'toys', image:'images/product1.jpg' },
+  { id:2, name:'Soft Teddy', price:650, category:'toys', image:'images/product2.jpg' },
+  { id:3, name:'Heart Keychain', price:150, category:'keychains', image:'images/product3.jpg' },
+  { id:4, name:'Name Keychain', price:200, category:'keychains', image:'images/product4.jpg' },
+  { id:5, name:'Cute Magnet', price:180, category:'magnets', image:'images/product5.jpg' },
+];
+
+let cart = [];
+
+function showCategory(cat) {
+  const container = document.getElementById('products');
+  container.innerHTML = '';
+
+  const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+
+  filtered.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'bg-white p-2 rounded shadow';
+    div.innerHTML = `
+      <img src="${p.image}" class="rounded mb-2 aspect-square object-cover" />
+      <h3 class="text-sm font-bold">${p.name}</h3>
+      <p class="text-sm">₹${p.price}</p>
+      <button onclick="addToCart(${p.id})" class="mt-2 w-full bg-green-500 text-white text-sm py-1 rounded">Add</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function addToCart(id) {
+  const item = products.find(p => p.id === id);
+  cart.push(item);
+  updateCart();
+}
+
+function updateCart() {
+  const list = document.getElementById('cartItems');
+  list.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(i => {
+    total += i.price;
+    const li = document.createElement('li');
+    li.textContent = `${i.name} - ₹${i.price}`;
+    list.appendChild(li);
+  });
+
+  document.getElementById('cartTotal').textContent = 'Total: ₹' + total;
+}
+
+function submitOrder() {
+  if(cart.length === 0) {
+    alert('Cart is empty');
+    return;
+  }
+
+  const phone = document.getElementById('phone').value;
+  if(!phone) {
+    alert('Please enter mobile number');
+    return;
+  }
+
+  let message = '🛍 *New Order*%0A%0A';
+  let total = 0;
+
+  cart.forEach(i => {
+    message += `• ${i.name} - ₹${i.price}%0A`;
+    total += i.price;
+  });
+
+  message += `%0A*Total:* ₹${total}`;
+  message += `%0A📞 *Customer Mobile:* ${phone}`;
+
+  const businessNumber = '91XXXXXXXXXX'; // replace with your WhatsApp number
+
+  window.open(`https://wa.me/${businessNumber}?text=${message}`, '_blank');
+}
+
+  const phone = document.getElementById('phone').value;
+  if(!phone) {
+    alert('Please enter mobile number');
+    return;
+  }
+
+  let body = 'Order Details:%0D%0A';
+  cart.forEach(i => body += `${i.name} - ₹${i.price}%0D%0A`);
+  body += `%0D%0AMobile: ${phone}`;
+
+  window.location.href = `mailto:your@email.com?subject=New Order&body=${body}`;
+}
+
+showCategory('all');
+</script>
+
+</body>
+</html>
