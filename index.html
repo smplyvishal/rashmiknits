@@ -22,47 +22,37 @@
     }
   </script>
 </head>
+
 <body id="body" class="m-0 bg-cream text-textMain transition-colors duration-300">
 
 <!-- Header -->
-<header class="fixed top-0 left-0 right-0 z-20 bg-cream relative">
+<header class="fixed top-0 left-0 right-0 z-20 bg-cream">
   <div class="max-w-md mx-auto px-4 py-3 text-center relative">
-    <!-- Logo positioned to extreme left of the header -->
-    <img src="images/logo.jpg" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full" alt="RashmiKnits logo" />
+    <img src="images/logo.jpg"
+         class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full"
+         alt="RashmiKnits logo" />
     <h1 class="text-2xl font-bold">RashmiKnits</h1>
     <p class="text-sm">Handmade with ❤️</p>
-
-    <!-- Theme Toggle -->
     <button onclick="toggleTheme()" class="mt-2 text-xs underline">Switch Theme</button>
   </div>
 </header>
 
-<!-- Horizontal Category Slider -->
+<!-- Categories -->
 <section class="max-w-md mx-auto px-2 py-4 relative">
-  <!-- Left / Right nav -->
-  <button id="catPrev" aria-label="Scroll categories left" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1 shadow hidden sm:block">
-    ◀
-  </button>
-
-  <div id="catStrip" class="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory px-8 py-2">
-    <!-- category items -->
-    <button onclick="showCategory('toys')" class="cat-btn snap-center min-w-[120px]">🧸 Toys</button>
-    <button onclick="showCategory('keychains')" class="cat-btn snap-center min-w-[120px]">🔑 Keychains</button>
-    <button onclick="showCategory('magnets')" class="cat-btn snap-center min-w-[120px]">🧲 Fridge Magnets</button>
-    <button onclick="showCategory('all')" class="cat-btn snap-center min-w-[120px]">🛍 All</button>
-    <!-- add more categories if needed -->
+  <div id="catStrip" class="flex gap-3 overflow-x-auto no-scrollbar px-4">
+    <button onclick="showCategory('toys')" class="cat-btn">🧸 Toys</button>
+    <button onclick="showCategory('keychains')" class="cat-btn">🔑 Keychains</button>
+    <button onclick="showCategory('magnets')" class="cat-btn">🧲 Fridge Magnets</button>
+    <button onclick="showCategory('all')" class="cat-btn">🛍 All</button>
   </div>
-
-  <button id="catNext" aria-label="Scroll categories right" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1 shadow hidden sm:block">
-    ▶
-  </button>
 </section>
 
 <!-- Products -->
 <section id="products" class="max-w-md mx-auto px-4 grid grid-cols-2 gap-4 pb-32"></section>
 
-<!-- Slide-up Cart -->
-<div id="cartPanel" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-xl translate-y-full transition-transform duration-300">
+<!-- Cart Panel -->
+<div id="cartPanel"
+     class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-xl translate-y-full transition-transform duration-300">
   <div class="max-w-md mx-auto p-4">
     <div class="flex justify-between items-center mb-2">
       <h2 class="font-semibold">🛒 Cart</h2>
@@ -70,18 +60,22 @@
     </div>
     <ul id="cartItems" class="text-sm space-y-1"></ul>
     <p id="cartTotal" class="font-semibold my-2"></p>
-    <input id="phone" type="tel" placeholder="Your Mobile Number" class="w-full border rounded-xl p-2 mb-2" />
-    <button onclick="submitOrder()" class="w-full bg-purple text-white py-2 rounded-xl">Order on WhatsApp</button>
+    <input id="phone" type="tel" placeholder="Your Mobile Number"
+           class="w-full border rounded-xl p-2 mb-2" />
+    <button onclick="submitOrder()"
+            class="w-full bg-purple text-white py-2 rounded-xl">
+      Order on WhatsApp
+    </button>
   </div>
 </div>
 
-<!-- Floating Cart Button -->
-<button onclick="toggleCart()" class="fixed bottom-5 right-5 bg-purple text-white w-14 h-14 rounded-full shadow-lg text-xl">🛒</button>
+<button onclick="toggleCart()"
+        class="fixed bottom-5 right-5 bg-purple text-white w-14 h-14 rounded-full shadow-lg text-xl">
+  🛒
+</button>
 
 <style>
-  /* Ensure no default browser gap at the top */
   html, body { margin: 0; }
-
   .cat-btn {
     background: white;
     padding: 12px 16px;
@@ -89,36 +83,9 @@
     font-weight: 500;
     box-shadow: 0 6px 14px rgba(0,0,0,0.08);
     white-space: nowrap;
-    flex: 0 0 auto; /* keep intrinsic width, allow scrolling */
   }
-
-  /* hide native scrollbar but still allow scroll (works for modern browsers) */
   .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
-
-<!-- Collapsible Info Sections -->
-<section class="max-w-md mx-auto px-4 pb-24">
-  <div class="bg-white rounded-2xl shadow mb-3 overflow-hidden">
-    <button onclick="toggleSection('about')" class="w-full flex justify-between items-center p-4 font-semibold">
-      <span>About Us</span><span>⌄</span>
-    </button>
-    <div id="about" class="hidden px-4 pb-4 text-sm text-gray-600">
-      RashmiKnits creates handmade crochet toys, gifts, keychains and decor with love and care. Each product is uniquely crafted, perfect for gifting or personal use.
-    </div>
-  </div>
-
-  <div class="bg-white rounded-2xl shadow mb-3 overflow-hidden">
-    <button onclick="toggleSection('contact')" class="w-full flex justify-between items-center p-4 font-semibold">
-      <span>Contact Us</span><span>⌄</span>
-    </button>
-    <div id="contact" class="hidden px-4 pb-4 text-sm text-gray-600">
-      📞 WhatsApp: +91 XXXXXXXX<br/>
-      📧 Email: your@email.com<br/>
-      📍 Handmade in India
-    </div>
-  </div>
-</section>
 
 <script>
 const products = [
@@ -129,10 +96,14 @@ const products = [
   { id:5, name:'Cute Fridge Magnet', price:180, category:'magnets', image:'images/product5.jpg' }
 ];
 
+const productMap = Object.fromEntries(products.map(p => [p.id, p]));
+
 let cart = {};
+let currentCategory = 'all';
 let theme = 'cream';
 
 function showCategory(cat) {
+  currentCategory = cat;
   const container = document.getElementById('products');
   container.innerHTML = '';
 
@@ -140,27 +111,24 @@ function showCategory(cat) {
 
   filtered.forEach(p => {
     const qty = cart[p.id] || 0;
-    const card = document.createElement('div');
-    card.className = 'bg-peach rounded-3xl p-3 shadow-md';
-    card.innerHTML = `
-      <img src="${p.image}" onclick="openPreview('${p.image}')" class="rounded-2xl aspect-square object-cover mb-2 cursor-pointer" alt="${p.name}" />
-      <h3 class="text-sm font-semibold">${p.name}</h3>
-      <p class="text-sm mb-2">₹${p.price}</p>
-      <div class="flex items-center justify-between">
-        <button onclick="updateQty(${p.id}, -1)" class="px-3 bg-white rounded">−</button>
-        <span>${qty}</span>
-        <button onclick="updateQty(${p.id}, 1)" class="px-3 bg-white rounded">+</button>
-      </div>
-    `;
-    container.appendChild(card);
+    container.innerHTML += `
+      <div class="bg-peach rounded-3xl p-3 shadow-md">
+        <img src="${p.image}" class="rounded-2xl aspect-square object-cover mb-2" />
+        <h3 class="text-sm font-semibold">${p.name}</h3>
+        <p class="text-sm mb-2">₹${p.price}</p>
+        <div class="flex justify-between">
+          <button onclick="updateQty(${p.id},-1)">−</button>
+          <span>${qty}</span>
+          <button onclick="updateQty(${p.id},1)">+</button>
+        </div>
+      </div>`;
   });
 }
 
 function updateQty(id, change) {
   cart[id] = Math.max(0, (cart[id] || 0) + change);
   updateCart();
-  // Re-render current category view by attempting to keep 'all' selected
-  showCategory('all');
+  showCategory(currentCategory);
 }
 
 function updateCart() {
@@ -168,21 +136,23 @@ function updateCart() {
   list.innerHTML = '';
   let total = 0;
 
-  Object.keys(cart).forEach(id => {
-    const qty = cart[id];
+  Object.entries(cart).forEach(([id, qty]) => {
     if (qty > 0) {
-      const product = products.find(p => p.id == id);
-      total += product.price * qty;
-      const li = document.createElement('li');
-      li.textContent = `${product.name} x ${qty}`;
-      list.appendChild(li);
+      const p = productMap[id];
+      total += p.price * qty;
+      list.innerHTML += `<li>${p.name} x ${qty}</li>`;
     }
   });
 
-  document.getElementById('cartTotal').textContent = total ? `Total: ₹${total}` : '';
+  document.getElementById('cartTotal').textContent =
+    total ? `Total: ₹${total}` : '';
 }
 
 function toggleCart() {
+  if (!Object.values(cart).some(q => q > 0)) {
+    alert('Your cart is empty');
+    return;
+  }
   document.getElementById('cartPanel').classList.toggle('translate-y-full');
 }
 
@@ -190,114 +160,44 @@ function submitOrder() {
   const phone = document.getElementById('phone').value;
   if (!phone) return alert('Enter mobile number');
 
-  let msg = '🧶 New Order – RashmiKnits%0A';
+  let msg = '🧶 New Order – RashmiKnits\n';
   let total = 0;
 
-  Object.keys(cart).forEach(id => {
-    const qty = cart[id];
+  Object.entries(cart).forEach(([id, qty]) => {
     if (qty > 0) {
-      const p = products.find(x => x.id == id);
-      msg += `${p.name} x ${qty} - ₹${p.price * qty}%0A`;
+      const p = productMap[id];
+      msg += `${p.name} x ${qty} - ₹${p.price * qty}\n`;
       total += p.price * qty;
     }
   });
 
-  msg += `%0ATotal: ₹${total}%0A📞 ${phone}`;
+  msg += `\nTotal: ₹${total}\n📞 ${phone}`;
 
-  window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`,'_blank');
+  window.open(
+    `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(msg)}`,
+    '_blank'
+  );
 }
 
 function toggleTheme() {
   const body = document.getElementById('body');
   const header = document.querySelector('header');
-
-  if (theme === 'cream') {
-    // switch to lavender
-    body.classList.remove('bg-cream');
-    body.classList.add('bg-lavender');
-    header.classList.remove('bg-cream');
-    header.classList.add('bg-lavender');
-    theme = 'lavender';
-  } else {
-    // switch to cream
-    body.classList.remove('bg-lavender');
-    body.classList.add('bg-cream');
-    header.classList.remove('bg-lavender');
-    header.classList.add('bg-cream');
-    theme = 'cream';
-  }
+  body.classList.toggle('bg-cream');
+  body.classList.toggle('bg-lavender');
+  header.classList.toggle('bg-cream');
+  header.classList.toggle('bg-lavender');
 }
 
-function toggleSection(id) {
-  document.getElementById(id).classList.toggle('hidden');
-}
-  
-function openPreview(src) {
-  const img = document.createElement('div');
-  img.className = 'fixed inset-0 bg-black/60 flex items-center justify-center z-50';
-  img.innerHTML = `<img src="${src}" class="max-w-[90%] max-h-[90%] rounded-2xl" onclick="this.parentNode.remove()" />`;
-  document.body.appendChild(img);
-}
-
-/* Ensure header doesn't overlap the page content:
-   Measure header height and set body's padding-top to that height.
-   Recalculate on load and on window resize so it adapts to different screen sizes. */
 function adjustBodyPaddingForHeader() {
-  const header = document.querySelector('header');
-  if (!header) return;
-  const h = header.offsetHeight || 0;
-  document.body.style.paddingTop = h + 'px';
+  document.body.style.paddingTop =
+    document.querySelector('header').offsetHeight + 'px';
 }
 
-/* Category strip scrolling helpers */
-function scrollCategoriesBy(amount) {
-  const strip = document.getElementById('catStrip');
-  if (!strip) return;
-  strip.scrollBy({ left: amount, behavior: 'smooth' });
-}
-
-window.addEventListener('load', () => {
+window.onload = () => {
   adjustBodyPaddingForHeader();
-
-  // Show products after header adjustment
   showCategory('all');
-
-  // Wire up prev/next
-  const prev = document.getElementById('catPrev');
-  const next = document.getElementById('catNext');
-  const strip = document.getElementById('catStrip');
-
-  const scrollAmount = 160; // px per click, tuned to category width
-
-  if (prev && next && strip) {
-    prev.addEventListener('click', () => scrollCategoriesBy(-scrollAmount));
-    next.addEventListener('click', () => scrollCategoriesBy(scrollAmount));
-
-    // Show/hide arrows based on overflow
-    function updateArrowVisibility() {
-      if (strip.scrollWidth > strip.clientWidth) {
-        prev.classList.remove('hidden');
-        next.classList.remove('hidden');
-      } else {
-        prev.classList.add('hidden');
-        next.classList.add('hidden');
-      }
-    }
-    updateArrowVisibility();
-    window.addEventListener('resize', updateArrowVisibility);
-
-    // Optional: keyboard support for arrows when strip focused
-    strip.setAttribute('tabindex', '0');
-    strip.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { scrollCategoriesBy(scrollAmount); e.preventDefault(); }
-      if (e.key === 'ArrowLeft') { scrollCategoriesBy(-scrollAmount); e.preventDefault(); }
-    });
-  }
-});
-
-window.addEventListener('resize', () => {
-  adjustBodyPaddingForHeader();
-});
+};
+window.onresize = adjustBodyPaddingForHeader;
 </script>
 
 </body>
