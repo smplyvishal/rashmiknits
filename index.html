@@ -22,7 +22,7 @@
     }
   </script>
 </head>
-<body id="body" class="bg-cream text-textMain transition-colors duration-300">
+<body id="body" class="m-0 bg-cream text-textMain transition-colors duration-300">
 
 <!-- Header -->
 <header class="fixed top-0 left-0 right-0 z-20 bg-cream relative">
@@ -79,6 +79,9 @@
 <button onclick="toggleCart()" class="fixed bottom-5 right-5 bg-purple text-white w-14 h-14 rounded-full shadow-lg text-xl">🛒</button>
 
 <style>
+  /* Ensure no default browser gap at the top */
+  html, body { margin: 0; }
+
   .cat-btn {
     background: white;
     padding: 12px 16px;
