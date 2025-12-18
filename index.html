@@ -97,6 +97,29 @@
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
 
+<!-- Collapsible Info Sections -->
+<section class="max-w-md mx-auto px-4 pb-24">
+  <div class="bg-white rounded-2xl shadow mb-3 overflow-hidden">
+    <button onclick="toggleSection('about')" class="w-full flex justify-between items-center p-4 font-semibold">
+      <span>About Us</span><span>⌄</span>
+    </button>
+    <div id="about" class="hidden px-4 pb-4 text-sm text-gray-600">
+      RashmiKnits creates handmade crochet toys, gifts, keychains and decor with love and care. Each product is uniquely crafted, perfect for gifting or personal use.
+    </div>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow mb-3 overflow-hidden">
+    <button onclick="toggleSection('contact')" class="w-full flex justify-between items-center p-4 font-semibold">
+      <span>Contact Us</span><span>⌄</span>
+    </button>
+    <div id="contact" class="hidden px-4 pb-4 text-sm text-gray-600">
+      📞 WhatsApp: +91 XXXXXXXX<br/>
+      📧 Email: your@email.com<br/>
+      📍 Handmade in India
+    </div>
+  </div>
+</section>
+
 <script>
 const products = [
   { id:1, name:'Handmade Crochet Bag', price:1200, category:'toys', image:'images/product1.jpg' },
@@ -205,6 +228,10 @@ function toggleTheme() {
   }
 }
 
+function toggleSection(id) {
+  document.getElementById(id).classList.toggle('hidden');
+}
+  
 function openPreview(src) {
   const img = document.createElement('div');
   img.className = 'fixed inset-0 bg-black/60 flex items-center justify-center z-50';
