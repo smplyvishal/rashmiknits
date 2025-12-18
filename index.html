@@ -112,14 +112,6 @@
 
 <script src="data/products.js"></script>
 <script>
-const products = [
-  { id:1, name:'Handmade Crochet Bag', price:1200, category:'toys', image:'images/product1.jpg' },
-  { id:2, name:'Crochet Octopus', price:900, category:'toys', image:'images/product2.jpg' },
-  { id:3, name:'Heart Keychain', price:150, category:'keychains', image:'images/product3.jpg' },
-  { id:4, name:'Name Keychain', price:200, category:'keychains', image:'images/product4.jpg' },
-  { id:5, name:'Cute Fridge Magnet', price:180, category:'magnets', image:'images/product5.jpg' }
-];
-
 const productMap = Object.fromEntries(products.map(p => [p.id, p]));
 
 let cart = {};
