@@ -4,128 +4,182 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RashmiKnits</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            bgSoft: '#FFF6ED',
-            cardSoft: '#FFD9B3',
-            accent: '#F59E0B',
-            textDark: '#1F2937'
+            cream: '#FFF6ED',
+            peach: '#FFD9B3',
+            lavender: '#EDE9FE',
+            purple: '#7C3AED',
+            textMain: '#1F2937'
           }
         }
       }
     }
   </script>
 </head>
+<body id="body" class="bg-cream text-textMain transition-colors duration-300">
 
-<body class="bg-bgSoft text-textDark pt-24 pb-40">
-
-<!-- Fixed Header -->
-<header class="fixed top-0 left-0 right-0 bg-bgSoft z-20">
-  <div class="max-w-md mx-auto p-4 text-center">
+<!-- Header -->
+<header class="sticky top-0 z-10">
+  <div class="max-w-md mx-auto px-4 py-5 text-center">
+    <img src="images/logo.png" class="w-20 h-20 mx-auto rounded-full mb-3" />
     <h1 class="text-2xl font-bold">RashmiKnits</h1>
-    <p class="text-sm text-gray-600">Handmade with ❤️</p>
+    <p class="text-sm">Handmade with ❤️</p>
+
+    <!-- Theme Toggle -->
+    <button onclick="toggleTheme()" class="mt-3 text-xs underline">Switch Theme</button>
   </div>
 </header>
 
 <!-- Categories -->
-<section class="max-w-md mx-auto px-4">
-  <div class="grid grid-cols-2 gap-3 mb-4">
-    <button onclick="showCategory('toys')" class="bg-white rounded-xl p-3 shadow">🧸 Toys</button>
-    <button onclick="showCategory('keychains')" class="bg-white rounded-xl p-3 shadow">🔑 Keychains</button>
-    <button onclick="showCategory('magnets')" class="bg-white rounded-xl p-3 shadow">🧲 Magnets</button>
-    <button onclick="showCategory('all')" class="bg-white rounded-xl p-3 shadow">🛍 All</button>
-  </div>
+<section class="max-w-md mx-auto px-4 py-4 grid grid-cols-2 gap-3">
+  <button onclick="showCategory('toys')" class="cat-btn">🧸 Toys</button>
+  <button onclick="showCategory('keychains')" class="cat-btn">🔑 Keychains</button>
+  <button onclick="showCategory('magnets')" class="cat-btn">🧲 Fridge Magnets</button>
+  <button onclick="showCategory('all')" class="cat-btn">🛍 All</button>
 </section>
 
 <!-- Products -->
-<section id="products" class="max-w-md mx-auto px-4 grid grid-cols-2 gap-4"></section>
+<section id="products" class="max-w-md mx-auto px-4 grid grid-cols-2 gap-4 pb-32"></section>
 
-<!-- Cart -->
-<section class="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+<!-- Slide-up Cart -->
+<div id="cartPanel" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-xl translate-y-full transition-transform duration-300">
   <div class="max-w-md mx-auto p-4">
-    <h2 class="font-bold mb-2">🛒 Cart</h2>
-    <ul id="cartItems" class="text-sm mb-2"></ul>
-    <p id="cartTotal" class="font-semibold mb-2"></p>
-
-    <input id="phone" type="tel" placeholder="Your Mobile Number"
-      class="w-full border rounded-lg p-2 mb-2" />
-
-    <button onclick="submitOrder()"
-      class="w-full bg-accent text-white py-2 rounded-xl font-semibold">
-      Order via WhatsApp
-    </button>
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="font-semibold">🛒 Cart</h2>
+      <button onclick="toggleCart()">❌</button>
+    </div>
+    <ul id="cartItems" class="text-sm space-y-1"></ul>
+    <p id="cartTotal" class="font-semibold my-2"></p>
+    <input id="phone" type="tel" placeholder="Your Mobile Number" class="w-full border rounded-xl p-2 mb-2" />
+    <button onclick="submitOrder()" class="w-full bg-purple text-white py-2 rounded-xl">Order on WhatsApp</button>
   </div>
-</section>
+</div>
+
+<!-- Floating Cart Button -->
+<button onclick="toggleCart()" class="fixed bottom-5 right-5 bg-purple text-white w-14 h-14 rounded-full shadow-lg text-xl">🛒</button>
+
+<style>
+  .cat-btn {
+    background: white;
+    padding: 14px;
+    border-radius: 18px;
+    font-weight: 500;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  }
+</style>
 
 <script>
 const products = [
-  { id:1, name:'Crochet Toy', price:500, category:'toys', image:'images/product1.jpg' },
-  { id:2, name:'Soft Teddy', price:650, category:'toys', image:'images/product2.jpg' },
+  { id:1, name:'Handmade Crochet Bag', price:1200, category:'toys', image:'images/product1.jpg' },
+  { id:2, name:'Crochet Octopus', price:900, category:'toys', image:'images/product2.jpg' },
   { id:3, name:'Heart Keychain', price:150, category:'keychains', image:'images/product3.jpg' },
   { id:4, name:'Name Keychain', price:200, category:'keychains', image:'images/product4.jpg' },
-  { id:5, name:'Cute Magnet', price:180, category:'magnets', image:'images/product5.jpg' }
+  { id:5, name:'Cute Fridge Magnet', price:180, category:'magnets', image:'images/product5.jpg' }
 ];
 
-let cart = [];
+let cart = {};
+let theme = 'cream';
 
 function showCategory(cat) {
   const container = document.getElementById('products');
   container.innerHTML = '';
+
   const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
 
   filtered.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'bg-cardSoft rounded-2xl p-2 shadow';
-    div.innerHTML = `
-      <img src="${p.image}" class="rounded-xl mb-2 aspect-square object-cover" />
+    const qty = cart[p.id] || 0;
+    const card = document.createElement('div');
+    card.className = 'bg-peach rounded-3xl p-3 shadow-md';
+    card.innerHTML = `
+      <img src="${p.image}" onclick="openPreview('${p.image}')" class="rounded-2xl aspect-square object-cover mb-2 cursor-pointer" />
       <h3 class="text-sm font-semibold">${p.name}</h3>
       <p class="text-sm mb-2">₹${p.price}</p>
-      <button onclick="addToCart(${p.id})"
-        class="w-full bg-white rounded-lg py-1 text-sm font-medium">
-        Add
-      </button>
+      <div class="flex items-center justify-between">
+        <button onclick="updateQty(${p.id}, -1)" class="px-3 bg-white rounded">−</button>
+        <span>${qty}</span>
+        <button onclick="updateQty(${p.id}, 1)" class="px-3 bg-white rounded">+</button>
+      </div>
     `;
-    container.appendChild(div);
+    container.appendChild(card);
   });
 }
 
-function addToCart(id) {
-  cart.push(products.find(p => p.id === id));
+function updateQty(id, change) {
+  cart[id] = Math.max(0, (cart[id] || 0) + change);
   updateCart();
+  showCategory('all');
 }
 
 function updateCart() {
   const list = document.getElementById('cartItems');
   list.innerHTML = '';
   let total = 0;
-  cart.forEach(i => {
-    total += i.price;
-    const li = document.createElement('li');
-    li.textContent = `${i.name} - ₹${i.price}`;
-    list.appendChild(li);
+
+  Object.keys(cart).forEach(id => {
+    const qty = cart[id];
+    if (qty > 0) {
+      const product = products.find(p => p.id == id);
+      total += product.price * qty;
+      const li = document.createElement('li');
+      li.textContent = `${product.name} x ${qty}`;
+      list.appendChild(li);
+    }
   });
-  document.getElementById('cartTotal').textContent = `Total: ₹${total}`;
+
+  document.getElementById('cartTotal').textContent = total ? `Total: ₹${total}` : '';
+}
+
+function toggleCart() {
+  document.getElementById('cartPanel').classList.toggle('translate-y-full');
 }
 
 function submitOrder() {
-  if (!cart.length) return alert('Cart is empty');
   const phone = document.getElementById('phone').value;
-  if (!phone) return alert('Please enter mobile number');
+  if (!phone) return alert('Enter mobile number');
 
-  let msg = '🛍 New Order%0A%0A';
-  cart.forEach(i => msg += `${i.name} - ₹${i.price}%0A`);
-  msg += `%0A📞 Mobile: ${phone}`;
+  let msg = '🧶 New Order – RashmiKnits%0A';
+  let total = 0;
 
-  const businessNumber = '91XXXXXXXXXX'; // replace
-  window.open(`https://wa.me/${businessNumber}?text=${msg}`, '_blank');
+  Object.keys(cart).forEach(id => {
+    const qty = cart[id];
+    if (qty > 0) {
+      const p = products.find(x => x.id == id);
+      msg += `${p.name} x ${qty} - ₹${p.price * qty}%0A`;
+      total += p.price * qty;
+    }
+  });
+
+  msg += `%0ATotal: ₹${total}%0A📞 ${phone}`;
+
+  window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`,'_blank');
+}
+
+function toggleTheme() {
+  const body = document.getElementById('body');
+  if (theme === 'cream') {
+    body.className = 'bg-lavender text-textMain transition-colors duration-300';
+    theme = 'lavender';
+  } else {
+    body.className = 'bg-cream text-textMain transition-colors duration-300';
+    theme = 'cream';
+  }
+}
+
+function openPreview(src) {
+  const img = document.createElement('div');
+  img.className = 'fixed inset-0 bg-black/60 flex items-center justify-center z-50';
+  img.innerHTML = `<img src="${src}" class="max-w-[90%] max-h-[90%] rounded-2xl" onclick="this.parentNode.remove()" />`;
+  document.body.appendChild(img);
 }
 
 showCategory('all');
 </script>
 
 </body>
-</html>
+  </html>
