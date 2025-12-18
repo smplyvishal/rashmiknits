@@ -2,17 +2,17 @@
 const products = [
   {
     id: 1,
-    name: "Handmade Crochet Bag",
-    price: 1200,
+    name: "Crochet Fairy",
+    price: 1100,
     category: "toys",
-    image: "product1.jpg"
+    image: "fairy.jpg"
   },
   {
     id: 2,
-    name: "Crochet Octopus",
-    price: 900,
+    name: "Crochet Lion",
+    price: 1000,
     category: "toys",
-    image: "product2.jpg"
+    image: "lion.jpg"
   },
   {
     id: 3,
