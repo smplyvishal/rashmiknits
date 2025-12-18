@@ -25,14 +25,15 @@
 <body id="body" class="bg-cream text-textMain transition-colors duration-300">
 
 <!-- Header -->
-<header class="fixed top-0 left-0 right-0 z-20 bg-white">
-  <div class="max-w-md mx-auto px-4 py-5 text-center">
-    <img src="images/logo.png" class="w-20 h-20 mx-auto rounded-full mb-3" alt="RashmiKnits logo" />
+<header class="fixed top-0 left-0 right-0 z-20 bg-cream relative">
+  <div class="max-w-md mx-auto px-4 py-3 text-center relative">
+    <!-- Logo positioned to extreme left of the header -->
+    <img src="images/logo.png" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full" alt="RashmiKnits logo" />
     <h1 class="text-2xl font-bold">RashmiKnits</h1>
     <p class="text-sm">Handmade with ❤️</p>
 
     <!-- Theme Toggle -->
-    <button onclick="toggleTheme()" class="mt-3 text-xs underline">Switch Theme</button>
+    <button onclick="toggleTheme()" class="mt-2 text-xs underline">Switch Theme</button>
   </div>
 </header>
 
@@ -182,11 +183,21 @@ function submitOrder() {
 
 function toggleTheme() {
   const body = document.getElementById('body');
+  const header = document.querySelector('header');
+
   if (theme === 'cream') {
-    body.className = 'bg-lavender text-textMain transition-colors duration-300';
+    // switch to lavender
+    body.classList.remove('bg-cream');
+    body.classList.add('bg-lavender');
+    header.classList.remove('bg-cream');
+    header.classList.add('bg-lavender');
     theme = 'lavender';
   } else {
-    body.className = 'bg-cream text-textMain transition-colors duration-300';
+    // switch to cream
+    body.classList.remove('bg-lavender');
+    body.classList.add('bg-cream');
+    header.classList.remove('bg-lavender');
+    header.classList.add('bg-cream');
     theme = 'cream';
   }
 }
