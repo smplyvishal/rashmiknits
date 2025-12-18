@@ -27,7 +27,7 @@
 <!-- Header -->
 <header class="fixed top-0 left-0 right-0 z-20 bg-white">
   <div class="max-w-md mx-auto px-4 py-5 text-center">
-    <img src="images/logo.png" class="w-20 h-20 mx-auto rounded-full mb-3" />
+    <img src="images/logo.png" class="w-20 h-20 mx-auto rounded-full mb-3" alt="RashmiKnits logo" />
     <h1 class="text-2xl font-bold">RashmiKnits</h1>
     <p class="text-sm">Handmade with ❤️</p>
 
@@ -36,12 +36,25 @@
   </div>
 </header>
 
-<!-- Categories -->
-<section class="max-w-md mx-auto px-4 py-4 grid grid-cols-2 gap-3">
-  <button onclick="showCategory('toys')" class="cat-btn">🧸 Toys</button>
-  <button onclick="showCategory('keychains')" class="cat-btn">🔑 Keychains</button>
-  <button onclick="showCategory('magnets')" class="cat-btn">🧲 Fridge Magnets</button>
-  <button onclick="showCategory('all')" class="cat-btn">🛍 All</button>
+<!-- Horizontal Category Slider -->
+<section class="max-w-md mx-auto px-2 py-4 relative">
+  <!-- Left / Right nav -->
+  <button id="catPrev" aria-label="Scroll categories left" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1 shadow hidden sm:block">
+    ◀
+  </button>
+
+  <div id="catStrip" class="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory px-8 py-2">
+    <!-- category items -->
+    <button onclick="showCategory('toys')" class="cat-btn snap-center min-w-[120px]">🧸 Toys</button>
+    <button onclick="showCategory('keychains')" class="cat-btn snap-center min-w-[120px]">🔑 Keychains</button>
+    <button onclick="showCategory('magnets')" class="cat-btn snap-center min-w-[120px]">🧲 Fridge Magnets</button>
+    <button onclick="showCategory('all')" class="cat-btn snap-center min-w-[120px]">🛍 All</button>
+    <!-- add more categories if needed -->
+  </div>
+
+  <button id="catNext" aria-label="Scroll categories right" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1 shadow hidden sm:block">
+    ▶
+  </button>
 </section>
 
 <!-- Products -->
@@ -67,11 +80,17 @@
 <style>
   .cat-btn {
     background: white;
-    padding: 14px;
+    padding: 12px 16px;
     border-radius: 18px;
     font-weight: 500;
     box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    white-space: nowrap;
+    flex: 0 0 auto; /* keep intrinsic width, allow scrolling */
   }
+
+  /* hide native scrollbar but still allow scroll (works for modern browsers) */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
 
 <script>
@@ -97,7 +116,7 @@ function showCategory(cat) {
     const card = document.createElement('div');
     card.className = 'bg-peach rounded-3xl p-3 shadow-md';
     card.innerHTML = `
-      <img src="${p.image}" onclick="openPreview('${p.image}')" class="rounded-2xl aspect-square object-cover mb-2 cursor-pointer" />
+      <img src="${p.image}" onclick="openPreview('${p.image}')" class="rounded-2xl aspect-square object-cover mb-2 cursor-pointer" alt="${p.name}" />
       <h3 class="text-sm font-semibold">${p.name}</h3>
       <p class="text-sm mb-2">₹${p.price}</p>
       <div class="flex items-center justify-between">
@@ -113,6 +132,7 @@ function showCategory(cat) {
 function updateQty(id, change) {
   cart[id] = Math.max(0, (cart[id] || 0) + change);
   updateCart();
+  // Re-render current category view by attempting to keep 'all' selected
   showCategory('all');
 }
 
@@ -178,8 +198,66 @@ function openPreview(src) {
   document.body.appendChild(img);
 }
 
-showCategory('all');
+/* Ensure header doesn't overlap the page content:
+   Measure header height and set body's padding-top to that height.
+   Recalculate on load and on window resize so it adapts to different screen sizes. */
+function adjustBodyPaddingForHeader() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  const h = header.offsetHeight || 0;
+  document.body.style.paddingTop = h + 'px';
+}
+
+/* Category strip scrolling helpers */
+function scrollCategoriesBy(amount) {
+  const strip = document.getElementById('catStrip');
+  if (!strip) return;
+  strip.scrollBy({ left: amount, behavior: 'smooth' });
+}
+
+window.addEventListener('load', () => {
+  adjustBodyPaddingForHeader();
+
+  // Show products after header adjustment
+  showCategory('all');
+
+  // Wire up prev/next
+  const prev = document.getElementById('catPrev');
+  const next = document.getElementById('catNext');
+  const strip = document.getElementById('catStrip');
+
+  const scrollAmount = 160; // px per click, tuned to category width
+
+  if (prev && next && strip) {
+    prev.addEventListener('click', () => scrollCategoriesBy(-scrollAmount));
+    next.addEventListener('click', () => scrollCategoriesBy(scrollAmount));
+
+    // Show/hide arrows based on overflow
+    function updateArrowVisibility() {
+      if (strip.scrollWidth > strip.clientWidth) {
+        prev.classList.remove('hidden');
+        next.classList.remove('hidden');
+      } else {
+        prev.classList.add('hidden');
+        next.classList.add('hidden');
+      }
+    }
+    updateArrowVisibility();
+    window.addEventListener('resize', updateArrowVisibility);
+
+    // Optional: keyboard support for arrows when strip focused
+    strip.setAttribute('tabindex', '0');
+    strip.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { scrollCategoriesBy(scrollAmount); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { scrollCategoriesBy(-scrollAmount); e.preventDefault(); }
+    });
+  }
+});
+
+window.addEventListener('resize', () => {
+  adjustBodyPaddingForHeader();
+});
 </script>
 
 </body>
-  </html>
+</html>
