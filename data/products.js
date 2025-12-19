@@ -34,5 +34,40 @@ const products = [
     price: 130,
     category: "keychains",
     image: "teddybear.jpg"
+  },
+  {
+    id: 6,
+    name: "Sunflower - Big (per piece)",
+    price: 210,
+    category: "flowers",
+    image: "bigsunflower.jpg"
+  },
+  {
+    id: 7,
+    name: "Gerbera - Pipe Cleaning Flower (per piece)",
+    price: 140,
+    category: "flowers",
+    image: "gerbera.jpg"
+},
+{
+    id: 8,
+    name: "Rose (per piece)",
+    price: 130,
+    category: "flowers",
+    image: "rose.jpg"
+},
+{
+    id: 9,
+    name: "Tulips (per piece)",
+    price: 90,
+    category: "flowers",
+    image: "tulips.jpg"
+},
+{
+    id: 10,
+    name: "Lavender (per piece)",
+    price: 110,
+    category: "flowers",
+    image: "lavender.jpg"
   }
 ];
