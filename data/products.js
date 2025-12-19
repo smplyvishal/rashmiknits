@@ -16,23 +16,23 @@ const products = [
   },
   {
     id: 3,
-    name: "Heart Keychain",
-    price: 150,
+    name: "Cuckoo Keychain",
+    price: 100,
     category: "keychains",
-    image: "product3.jpg"
+    image: "cuckoo.jpg"
   },
   {
     id: 4,
-    name: "Name Keychain",
-    price: 200,
+    name: "Cup Keychain",
+    price: 100,
     category: "keychains",
-    image: "product4.jpg"
+    image: "yellowcup.jpg"
   },
   {
     id: 5,
-    name: "Cute Fridge Magnet",
-    price: 180,
-    category: "magnets",
-    image: "product5.jpg"
+    name: "Teddy Keychain",
+    price: 130,
+    category: "keychains",
+    image: "teddybear.jpg"
   }
 ];
