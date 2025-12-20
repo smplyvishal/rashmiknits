@@ -69,5 +69,12 @@ const products = [
     price: 110,
     category: "flowers",
     image: "lavender.jpg"
+  },
+  {
+    id: 11,
+    name: "French Fries",
+    price: 120,
+    category: "magnets",
+    image: "frenchfriessmall.jpg"
   }
 ];
