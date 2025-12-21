@@ -75,10 +75,13 @@
 <section class="max-w-md mx-auto px-4 mt-8">
   <h2 class="text-lg font-semibold mb-3">❤️ Customer Reviews</h2>
 
-  <div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+  <div id="reviewsContainer"
+       class="flex gap-4 overflow-x-auto pb-2">
+  </div>
+  <!-- <div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
     
     <!-- Review Card -->
-    <div class="min-w-[240px] bg-white rounded-2xl p-4 shadow">
+    <!--<div class="min-w-[240px] bg-white rounded-2xl p-4 shadow">
       <div class="text-yellow-500 text-sm mb-1">★★★★★</div>
       <p class="text-sm text-gray-700">
         Beautiful craftsmanship! The toy was exactly as shown and very neatly made.
@@ -102,7 +105,7 @@
       <p class="text-xs text-gray-500 mt-2">— WhatsApp Order</p>
     </div>
 
-  </div>
+  </div> -->
 </section>
   
 <!-- Collapsible Info Sections -->
@@ -272,5 +275,8 @@ window.onload = () => {
 window.onresize = adjustBodyPaddingForHeader;
 </script>
 
+<!-- Reviews JS -->
+<script src="data/reviews.js"></script>
+  
 </body>
 </html>
