@@ -76,5 +76,40 @@ const products = [
     price: 120,
     category: "magnets",
     image: "frenchfriessmall.jpg"
-  }
+  },
+    {
+    id: 12,
+    name: "Caterpillar",
+    price: 950,
+    category: "toys",
+    image: "caterpillar.jpg"
+  },
+{
+    id: 13,
+    name: "Cats (per piece)",
+    price: 240,
+    category: "toys",
+    image: "cats.jpg"
+  },
+{
+    id: 14,
+    name: "Octopus",
+    price: 380,
+    category: "toys",
+    image: "octopus.jpg"
+  },
+{
+    id: 15,
+    name: "Doll",
+    price: 850,
+    category: "toys",
+    image: "doll.jpg"
+  },
+{
+    id: 16,
+    name: "Rabbit",
+    price: 330,
+    category: "toys",
+    image: "rabbit.jpg"
+}
 ];
