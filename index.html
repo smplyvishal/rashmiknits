@@ -164,6 +164,44 @@
     </div>
   </div>
 </section>
+
+<!-- FAQ Section -->
+<section class="max-w-md mx-auto px-4 py-10">
+  <h2 class="text-xl font-bold text-center mb-6">FAQs</h2>
+
+  <div class="space-y-3">
+
+    <div class="bg-white rounded-2xl shadow overflow-hidden">
+      <button onclick="toggleFAQ(this)" class="w-full flex justify-between items-center p-4 font-semibold">
+        <span>Do you accept custom orders?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-content hidden px-4 pb-4 text-sm text-gray-600">
+        Yes !. Just message us on our WhatsApp number.
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow overflow-hidden">
+      <button onclick="toggleFAQ(this)" class="w-full flex justify-between items-center p-4 font-semibold">
+        <span>Do you deliver all over India?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-content hidden px-4 pb-4 text-sm text-gray-600">
+        Yes, we ship across India. Delivery time depends on your location.
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow overflow-hidden">
+      <button onclick="toggleFAQ(this)" class="w-full flex justify-between items-center p-4 font-semibold">
+        <span>Do you accept bulk orders ?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-content hidden px-4 pb-4 text-sm text-gray-600">
+        Yes. Feel free to WhatsApp Us and we will make it happen 😊
+      </div>
+    </div>
+  </div>
+</section>
   
 <button onclick="toggleCart()"
         class="fixed bottom-5 right-5 bg-purple text-white w-14 h-14 rounded-full shadow-lg text-xl">
@@ -308,6 +346,16 @@ window.onresize = adjustBodyPaddingForHeader;
 
 <!-- Reviews JS -->
 <script src="data/reviews.js"></script>
+
+<script>
+function toggleFAQ(button) {
+  const content = button.nextElementSibling;
+  const icon = button.querySelector('.faq-icon');
+
+  content.classList.toggle('hidden');
+  icon.textContent = content.classList.contains('hidden') ? '+' : '−';
+}
+</script>
   
 </body>
 </html>
