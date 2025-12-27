@@ -139,5 +139,26 @@ const products = [
     price: 320,
     category: "homedecor",
     image: "yellowandredtoran.jpg"
-  }
+  },
+  {
+    id: 21,
+    name: "Tulips Pot",
+    price: 280,
+    category: "homedecor",
+    image: "tulips.jpg"
+  },
+{
+    id: 22,
+    name: "Daisy Pot - 3in1",
+    price: 340,
+    category: "homedecor",
+    image: "threedaisy.jpg"
+  },
+{
+    id: 23,
+    name: "Sunflower Pot - 2in1",
+    price: 320,
+    category: "homedecor",
+    image: "twosunflower.jpg"
+}
 ];
