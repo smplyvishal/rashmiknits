@@ -111,5 +111,19 @@ const products = [
     price: 330,
     category: "toys",
     image: "rabbit.jpg"
-}
+},
+  {
+    id: 17,
+    name: "Hanging Pot - White",
+    price: 340,
+    category: "homedecor",
+    image: "hangingpotface.jpg"
+  },
+{
+    id: 18,
+    name: "Hanging Pot - Flowers",
+    price: 380,
+    category: "homedecor",
+    image: "brownhangingpot.jpg"
+  }
 ];
