@@ -125,5 +125,19 @@ const products = [
     price: 380,
     category: "homedecor",
     image: "brownhangingpot.jpg"
+  },
+    {
+    id: 19,
+    name: "Swastik Toran",
+    price: 340,
+    category: "homedecor",
+    image: "swastiktoran.jpg"
+  },
+{
+    id: 20,
+    name: "Yellow & Red Toran",
+    price: 320,
+    category: "homedecor",
+    image: "yellowandredtoran.jpg"
   }
 ];
