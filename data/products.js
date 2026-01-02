@@ -168,4 +168,11 @@ const products = [
     category: "toys",
     image: "dragon.jpg"
 },
+{
+    id: 16,
+    name: "Octopus (Colors Available- Pink/Yellow)",
+    price: 480,
+    category: "toys",
+    image: "yellowoctopus.jpg"
+},
 ];
