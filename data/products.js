@@ -210,4 +210,32 @@ const products = [
     category: "magnets",
     image: "mag3.jpg"
   },
+  {
+    id: 31,
+    name: "Big Flower",
+    price: 180,
+    category: "magnets",
+    image: "mag4.jpg"
+  },
+  {
+    id: 32,
+    name: "Smiley (More Colors Available - Per Piece)",
+    price: 160,
+    category: "magnets",
+    image: "mag5.jpg"
+  },
+  {
+    id: 33,
+    name: "Smiley Keyring (More Colors Available)",
+    price: 160,
+    category: "keychains",
+    image: "key1.jpg"
+  },
+  {
+    id: 34,
+    name: "Toffee and Ice Cream (Per Piece)",
+    price: 110,
+    category: "magnets",
+    image: "mag6.jpg"
+  }
 ];
