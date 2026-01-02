@@ -160,5 +160,12 @@ const products = [
     price: 320,
     category: "homedecor",
     image: "twosunflower.jpg"
-}
+},
+{
+    id: 24,
+    name: "Dragon",
+    price: 680,
+    category: "toys",
+    image: "dragon.jpg"
+},
 ];
