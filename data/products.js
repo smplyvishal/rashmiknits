@@ -169,10 +169,24 @@ const products = [
     image: "dragon.jpg"
 },
 {
-    id: 16,
+    id: 25,
     name: "Octopus (Colors Available- Pink/Yellow)",
     price: 480,
     category: "toys",
     image: "yellowoctopus.jpg"
 },
+{
+    id: 26,
+    name: "Burger",
+    price: 160,
+    category: "magnets",
+    image: "burger.jpg"
+  },
+{
+    id: 27,
+    name: "Donuts (Per Piece)",
+    price: 120,
+    category: "magnets",
+    image: "donutmagnet.jpg"
+  },
 ];
