@@ -202,5 +202,12 @@ const products = [
     price: 90,
     category: "magnets",
     image: "mag1.jpg"
-  }
+  },
+  {
+    id: 30,
+    name: "McDonald's Happy Meal",
+    price: 530,
+    category: "magnets",
+    image: "mag3.jpg"
+  },
 ];
