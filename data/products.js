@@ -189,4 +189,18 @@ const products = [
     category: "magnets",
     image: "donutmagnet.jpg"
   },
+{
+    id: 28,
+    name: "McDonald's Colddrink Cup",
+    price: 140,
+    category: "magnets",
+    image: "mag2.jpg"
+  },
+  {
+    id: 29,
+    name: "Small Flowers (Per Piece)",
+    price: 90,
+    category: "magnets",
+    image: "mag1.jpg"
+  }
 ];
