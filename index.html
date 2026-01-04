@@ -41,6 +41,7 @@
 <!-- Categories -->
 <section class="max-w-md mx-auto px-2 py-4 relative">
   <div id="catStrip" class="flex gap-3 overflow-x-auto no-scrollbar px-4">
+    <button onclick="showCategory('bestsellers')" class="cat-btn">⭐ Best Sellers</button>
     <button onclick="showCategory('flowers')" class="cat-btn">🌸 Flowers</button>
     <button onclick="showCategory('homedecor')" class="cat-btn">🏠 Home Decor</button>
     <button onclick="showCategory('toys')" class="cat-btn">🧸 Toys</button>
@@ -225,6 +226,7 @@
 <script src="data/products.js"></script>
 <script>
 const productMap = Object.fromEntries(products.map(p => [p.id, p]));
+const bestSellerIds = [1, 3, 5]; // put product IDs here
 
 let cart = {};
 let currentCategory = 'all';
@@ -235,7 +237,15 @@ function showCategory(cat) {
   const container = document.getElementById('products');
   container.innerHTML = '';
 
-  const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+  // const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+  let filtered;
+  if (cat === 'all') {
+    filtered = products;
+  } else if (cat === 'bestsellers') {
+    filtered = bestSellerIds.map(id => productMap[id]).filter(Boolean);
+  } else {
+    filtered = products.filter(p => p.category === cat);
+  }
 
   filtered.forEach(p => {
     const qty = cart[p.id] || 0;
