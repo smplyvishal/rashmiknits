@@ -243,6 +243,7 @@ const products = [
     name: "Easter Bunny (per piece)",
     price: 240,
     category: "homedecor",
+    previewVideo: "hdecor1-preview.mp4",
     image: "hdecor1.jpg"
 },
 ];
