@@ -237,5 +237,12 @@ const products = [
     price: 110,
     category: "magnets",
     image: "mag6.jpg"
-  }
+  },
+  {
+    id: 35,
+    name: "Easter Bunny (per piece)",
+    price: 240,
+    category: "homedecor",
+    image: "hdecor1.jpg"
+},
 ];
