@@ -1,12 +1,12 @@
 // data/products.js
 const products = [
-  {
+    {
     id: 1,
-    name: "Crochet Fairy",
-    price: 1200,
-    category: "toys",
-    image: "fairy.jpg"
-  },
+    name: "Cute Krishna",
+    price: 360,
+    category: "homedecor",
+    image: "hdecor2.jpg"
+   },
   {
     id: 2,
     name: "Crochet Lion",
@@ -245,26 +245,26 @@ const products = [
     category: "homedecor",
     previewVideo: "hdecor1-preview.mp4",
     image: "hdecor1.jpg"
-},
-  {
-    id: 36,
-    name: "Cute Krishna",
-    price: 360,
-    category: "homedecor",
-    image: "hdecor2.jpg"
-},
+   },
     {
-    id: 37,
+    id: 36,
     name: "Multicolour Crochet Desk Organiser",
     price: 220,
     category: "homedecor",
     image: "hdecor3.jpg"
 },
-    {
-    id: 38,
+  {
+    id: 37,
     name: "Yellow Crochet Desk Organiser",
     price: 190,
     category: "homedecor",
     image: "hdecor4.jpg"
-},
+  },
+  {
+    id: 38,
+    name: "Crochet Fairy",
+    price: 1200,
+    category: "toys",
+    image: "fairy.jpg"
+  },
 ];
