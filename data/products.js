@@ -267,4 +267,18 @@ const products = [
     category: "toys",
     image: "fairy.jpg"
   },
+  {
+    id: 39,
+    name: "Multicolor Crochet Bottle Holder (Color Customisation available)",
+    price: 260,
+    category: "homedecor",
+    image: "hdecor6.jpg"
+  },
+  {
+    id: 40,
+    name: "Single Color Crochet Bottle Holder (Price per piece)",
+    price: 230,
+    category: "homedecor",
+    image: "hdecor5.jpg"
+  },
 ];
