@@ -261,7 +261,7 @@ const products = [
     image: "hdecor3.jpg"
 },
     {
-    id: 36,
+    id: 38,
     name: "Yellow Crochet Desk Organiser",
     price: 190,
     category: "homedecor",
