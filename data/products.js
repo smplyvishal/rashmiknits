@@ -246,4 +246,11 @@ const products = [
     previewVideo: "hdecor1-preview.mp4",
     image: "hdecor1.jpg"
 },
+  {
+    id: 36,
+    name: "Cute Krishna",
+    price: 360,
+    category: "homedecor",
+    image: "hdecor2.jpg"
+},
 ];
